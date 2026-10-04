@@ -1,0 +1,7 @@
+node_modules
+.env
+*.log
+
+.devdb
+backups/
+CREDENTIALS.local.txt
