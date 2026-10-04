@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
 import { env } from './env.js'
+import { inBackground } from '../utils/background.js'
 
 let transporter = null
 
@@ -129,9 +130,11 @@ function sendNotice({ to, subject, heading, paragraphs, button }) {
 
 // Fire-and-forget for notifications that must not block or fail the request
 export function sendInBackground(promiseFactory, label) {
-  Promise.resolve()
-    .then(promiseFactory)
-    .catch((err) => console.error(`[mail] ${label} failed: ${err.message}`))
+  inBackground(
+    Promise.resolve()
+      .then(promiseFactory)
+      .catch((err) => console.error(`[mail] ${label} failed: ${err.message}`)),
+  )
 }
 
 export function sendPasswordResetEmail({ to, name, link, minutes }) {

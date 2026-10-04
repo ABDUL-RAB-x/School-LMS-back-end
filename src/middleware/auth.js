@@ -7,7 +7,7 @@ import Session from '../models/Session.js'
 import { Student, Teacher } from '../models/index.js'
 import { demoRestriction } from './demo.js'
 
-// Verifies the access token (httpOnly cookie
+// Verifies the access token (httpOnly cookie or Bearer header) and attaches req.user
 export const protect = asyncHandler(async (req, _res, next) => {
   const header = req.headers.authorization || ''
   const token = header.startsWith('Bearer ') ? header.slice(7).trim() : readCookie(req, ACCESS_COOKIE)

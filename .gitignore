@@ -5,3 +5,4 @@ node_modules
 .devdb
 backups/
 CREDENTIALS.local.txt
+.vercel
