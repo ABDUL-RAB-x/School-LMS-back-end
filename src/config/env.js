@@ -13,7 +13,8 @@ const int = (v, fallback) => {
 }
 
 export const env = {
-  nodeEnv: process.env.NODE_ENV || 'development',
+  // Vercel does not always pass NODE_ENV to functions, so a Vercel deployment is always production
+  nodeEnv: process.env.VERCEL ? 'production' : process.env.NODE_ENV || 'development',
   port: int(process.env.PORT, 5051),
   clientOrigin: process.env.CLIENT_ORIGIN || 'http://localhost:5273',
 
